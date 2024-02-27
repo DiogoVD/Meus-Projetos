@@ -1,65 +1,90 @@
 const state = {
-    variaveis: {
-        player: 0,
-        computer: 0
-    },
     view:{
         quadrados: document.querySelectorAll(".quadrados")
 
     },
 }
+
+//  0   3   6
+//  1   4   7
+//  2   5   8
 const arrayVencedor = [
-    [1,2,3],
-    [1,4,7],
-    [1,5,9],
-    [4,5,6],
-    [2,5,8],
-    [7,8,9],
-    [3,5,7],
-    [3,6,9]
+    ["0","1","2"],
+    ["3","4","5"],
+    ["6","7","8"],
+    ["0","3","6"],
+    ["1","4","7"],
+    ["2","5","8"],
+    ["0","4","8"],
+    ["2","4","6"]
 ];
-const casas = [1,2,3,4,5,6,7,8,9];
+const casas = ["0","1","2","3","4","5","6","7","8"];
 let jogadasPlayer = [];
 let jogadasComputer = [];
 let casasDisponiveis = [];
 
 
+function jogadaComputer(){
+    filtroJogadas();
+    
+    let casaAleatoria = Math.floor(Math.random() * casasDisponiveis.length);
+    let computerMove = casasDisponiveis[casaAleatoria]
+    jogadasComputer.push(computerMove);
+    state.view.quadrados[computerMove].classList.add("marcaO");
+    checkVitoria(jogadasComputer,arrayVencedor, "O");
 
-function jogada(){
+    
+};
+
+function filtroJogadas(){
+    let arrayAux = jogadasComputer.concat(jogadasPlayer);
+    casasDisponiveis = [];
+    casas.forEach((e) => {
+        if((arrayAux.includes(e)) === false){
+            casasDisponiveis.push(e);
+        }
+    });
+}
+
+
+function jogadaPlayer1(){
     state.view.quadrados.forEach((quadrado) =>{
         quadrado.addEventListener("mousedown", () => {
             jogadasPlayer.push(quadrado.id)
-            console.log(jogadasPlayer);
             quadrado.classList.add("marcaX");
             if(jogadasPlayer.length>2){
-                checkVitoria(jogadasPlayer, arrayVencedor);
+                checkVitoria(jogadasPlayer, arrayVencedor, "X");
             }
-            
         });
     });
 }
 
-function checkVitoria(jogadas, arrayVencedor){
+function checkVitoria(jogadas, arrayVencedor, player){
     let vence = 0;
     arrayVencedor.map( (x)=> {
         x.map((elemento) => {
-            if((jogadas.sort()).includes(elemento.toString()) === true){
+            if(jogadas.includes(elemento) === true){
                 vence++;
-            }
-            if((jogadas.sort()).includes(elemento.toString()) === false){
-                vence = 0;
             }
         })
         if(vence === 3){
-            alert("Ganhou");
+            alert(`Ganhador: ${player}`)
         }
-        console.log(x, jogadas)
+        vence = 0;
     });
     
-}
+};
 
 function init(){
-    jogada()
+    if(jogadasPlayer.length <= jogadasComputer.length){
+        jogadaPlayer1();
+    }else{
+        jogadaComputer();
+    }    
+    if(jogadasPlayer.length >= 4){
+        alert("Jogo empatou");
+    }
+
     
 }
 
