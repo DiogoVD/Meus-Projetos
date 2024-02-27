@@ -4,6 +4,8 @@ https://blogjavascript.com.br/post/criando-uma-aplicacao-de-chat-em-tempo-real-c
 
 https://socket.io/get-started/chat
 
+https://socket.io/pt-br/docs/v4/emitting-events/
+
 para iniciar um projeto
 
 - npm init
