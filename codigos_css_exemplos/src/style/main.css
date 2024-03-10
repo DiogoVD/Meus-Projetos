@@ -127,3 +127,44 @@ body{
         transform: rotate(360deg);
     }
 }
+
+/* ---------------------------------------------------------------------- */
+
+.loop{
+    border: 16px dashed lightgrey;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border-top: 16px solid black;
+    border-bottom: 16px solid black;
+    animation: spin 2s linear infinite;
+} 
+
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+    
+}
+
+/* ------------------------------------------------------------------ */
+
+.loading{
+    display: flex;
+    gap: 5px;
+    animation: pulo 2s infinite ease;
+}
+
+.ball{
+    border: 10px solid blue;
+    width: 10px;
+    height: 10px;
+    border-radius: 40%;
+}
+
+
+@keyframes pulo{
+    0% {transform: scalex(1);}
+    50% {transform: scalex(2);}
+    100% {transform: scalex(1);}
+    
+}
