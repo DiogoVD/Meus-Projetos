@@ -13,6 +13,7 @@ para iniciar um projeto
 
 -criar o arquivo server.js
 
+-no arquivo index.html inserir o script: <script src="/socket.io/socket.io.js"></script>
 -----Dicas------
 broadcast - envia a resposta para todos os clientes exceto o que mandou a mensagem.
 emit - envia a resposta para todos os clientes conectados
