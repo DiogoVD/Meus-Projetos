@@ -5,7 +5,9 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server);
+const io = new Server(server, {
+    connectionStateRecovery:{}
+});
 
 // definindo rotas
 app.use("/public", express.static("public"));
@@ -22,6 +24,9 @@ server.listen(3000, () =>{
 
 io.on("connection", (socket) =>{
     console.log("Usuário conectado");
+    console.log(socket.id);
+
+    socket.recovered
 
     socket.on('disconnect', () =>{
         console.log("Usuário desconectado");
